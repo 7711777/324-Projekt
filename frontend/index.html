@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Gehaltsrechner</title>
+<style>
+  body {
+    font-family: system-ui, sans-serif;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: #fafafa;
+  }
+
+  input {
+    font-size: 2rem;
+    border: 0;
+    border-bottom: 2px solid #111;
+    background: transparent;
+    text-align: center;
+    outline: none;
+    width: 14rem;
+  }
+</style>
+</head>
+<body>
+  <form action="http://localhost:3000/berechnen" method="POST">
+    <input
+      type="number"
+      name="stundenlohn"
+      step="0.5"
+      min="0"
+      placeholder="CHF / Stunde"
+      autofocus
+      required
+    >
+  </form>
+</body>
+</html>
