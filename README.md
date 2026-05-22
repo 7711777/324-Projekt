@@ -1,23 +1,23 @@
 # 324-Projekt — Gehaltsrechner
 
-Ein minimalistischer Gehaltsrechner: Stundenlohn eingeben, Wochen-, Monats- und Jahresgehalt erhalten.
+Ein minimalistischer Gehaltsrechner: Stundenlohn und Wochenarbeitszeit eingeben, Wochen-, Monats- und Jahresgehalt erhalten.
 
 ## Struktur
 
-- `frontend/` — einfaches HTML-Formular (`index.html`)
-- `backend/` — Java HTTP-Server (`Server.java`, nutzt nur das JDK, keine externen Libraries)
+- `frontend/` — HTML-Formular (`index.html`)
+- `backend/`
+  - `Server.java` — HTTP-Server (nur JDK, keine externen Libraries)
+- `PLANUNG.md` — User-Stories, Tasks, Label- und Milestone-Schema
 
 ## Berechnung
 
-Annahmen:
-- 8 Stunden pro Tag
-- 5 Tage pro Woche → 40 Stunden / Woche
-- 52 Wochen pro Jahr
+Bei einer Wochenarbeitszeit `h` (Stunden / Woche, Default 40):
 
-Daraus:
-- Woche = Stundenlohn × 40
-- Monat = Stundenlohn × 40 × 52 / 12 ≈ Stundenlohn × 173.33
-- Jahr  = Stundenlohn × 40 × 52 = Stundenlohn × 2080
+- Woche = Stundenlohn × h
+- Monat = Stundenlohn × h × 52 / 12
+- Jahr  = Stundenlohn × h × 52
+
+Default 40 = 8 h/Tag × 5 Tage. Teilzeit-Pensen einfach durch tieferes `h` abdecken (z.B. 20 für 50 %).
 
 ## Starten
 
@@ -27,6 +27,12 @@ Im Ordner `backend/`:
 java Server.java
 ```
 
-Anschliessend `frontend/index.html` im Browser öffnen, Stundenlohn eintippen und absenden. Das Resultat liefert das Backend als HTML zurück.
+Anschliessend `frontend/index.html` im Browser öffnen, Stundenlohn und Stunden/Woche eingeben und absenden. Das Resultat liefert das Backend als HTML zurück.
 
-**Voraussetzung:** Java 11 oder neuer.
+**Voraussetzung:** Java 15 oder neuer (Text-Blocks, Single-File-Source).
+
+## Validierung
+
+- Stundenlohn muss positiv und numerisch sein (Frontend `min="0.5"`, Backend prüft erneut).
+- Stunden / Woche ist optional; ohne Angabe wird 40 verwendet.
+- Ungültige Eingaben werden vom Backend mit HTTP 400 und einer kleinen Fehlerseite abgewiesen.
