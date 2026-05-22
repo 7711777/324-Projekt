@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gehaltsrechner</title>
 <style>
   body {
@@ -10,7 +11,21 @@
     place-items: center;
     min-height: 100vh;
     margin: 0;
+    padding: 1rem;
     background: #fafafa;
+  }
+
+  form {
+    display: grid;
+    gap: 1rem;
+    width: 14rem;
+  }
+
+  label {
+    display: grid;
+    gap: .25rem;
+    font-size: .9rem;
+    color: #555;
   }
 
   input {
@@ -20,21 +35,42 @@
     background: transparent;
     text-align: center;
     outline: none;
-    width: 14rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 480px) {
+    form { width: 100%; max-width: 20rem; }
+    input { font-size: 1.5rem; }
   }
 </style>
 </head>
 <body>
   <form action="http://localhost:3000/berechnen" method="POST">
-    <input
-      type="number"
-      name="stundenlohn"
-      step="0.5"
-      min="0"
-      placeholder="CHF / Stunde"
-      autofocus
-      required
-    >
+    <label>
+      Stundenlohn
+      <input
+        type="number"
+        name="stundenlohn"
+        step="0.5"
+        min="0.5"
+        placeholder="CHF / Stunde"
+        autofocus
+        required
+      >
+    </label>
+    <label>
+      Stunden / Woche
+      <input
+        type="number"
+        name="stunden_woche"
+        step="0.5"
+        min="1"
+        max="80"
+        value="40"
+        required
+      >
+    </label>
   </form>
 </body>
 </html>
